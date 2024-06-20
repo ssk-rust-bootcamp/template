@@ -81,3 +81,25 @@ cargo nextest 是一个 Rust 增强测试工具。
 ```bash
 cargo install cargo-nextest --locked
 ```
+#### deny check
+- rm -rf deny.toml 删除掉现有的 deny 配置
+- cargo deny init 初始化适应现版本的配置文件
+- ️在 deny.toml 中找到 git-fetch-with-cli = true 并取消注释
+- 修改 [licenses] 字段
+```
+unlicensed = "allow"
+allow = [
+  "MIT",
+  "Apache-2.0",
+  "Unicode-DFS-2016",
+  "MPL-2.0",
+  "BSD-2-Clause",
+  "BSD-3-Clause",
+  "ISC",
+  "CC0-1.0",
+]
+
+```
+- 执行 cargo deny check
+
+- 此时再执行 git commit -a 就没有问题了
